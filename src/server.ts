@@ -3,6 +3,7 @@ import cors from '@fastify/cors'
 
 import 'dotenv/config'
 
+import { authRoutes } from './routes/auth'
 import { memoriesRoutes } from './routes/memories'
 
 const app = fastify()
@@ -15,6 +16,7 @@ app.get('/', () => {
   return 'Hello World!'
 })
 
+void app.register(authRoutes)
 void app.register(memoriesRoutes)
 
 const port = process.env.SERVER_PORT ?? 3333
