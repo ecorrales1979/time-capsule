@@ -7,7 +7,12 @@ import 'dotenv/config'
 import { authRoutes } from './routes/auth'
 import { memoriesRoutes } from './routes/memories'
 
-const app = fastify()
+const app = fastify({
+  logger: {
+    level: 'info',
+    file: './storage/logs/log.txt',
+  },
+})
 
 void app.register(cors, {
   origin: true,

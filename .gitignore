@@ -4,6 +4,9 @@
 
 /build
 
+/storage/logs/*
+!/storage/logs/.gitkeep
+
 .env
 *.db
 
