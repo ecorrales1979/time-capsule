@@ -17,8 +17,11 @@ const bodySchema = z.object({
 export async function memoriesRoutes(app: FastifyInstance): Promise<any> {
   app.addHook('preHandler', authMiddleware)
 
-  app.get('/memories', async () => {
+  app.get('/memories', async (request) => {
     const memories = await prisma.memory.findMany({
+      where: {
+        userId: request.user.sub,
+      },
       orderBy: {
         createdAt: 'asc',
       },
