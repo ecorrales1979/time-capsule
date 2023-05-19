@@ -1,6 +1,8 @@
 import fastify from 'fastify'
 import cors from '@fastify/cors'
 
+import 'dotenv/config'
+
 import { memoriesRoutes } from './routes/memories'
 
 const app = fastify()
@@ -15,10 +17,12 @@ app.get('/', () => {
 
 void app.register(memoriesRoutes)
 
+const port = process.env.SERVER_PORT ?? 3333
+
 app
-  .listen({ port: 3333 })
+  .listen({ port: Number(port) })
   .then(() => {
-    console.log('🚀 HTTP server running on http://localhost:3333')
+    console.log(`🚀 HTTP server running on http://localhost:${port}`)
   })
   .catch((error: Error) => {
     console.error(error)
