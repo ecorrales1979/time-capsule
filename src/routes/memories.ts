@@ -2,6 +2,7 @@ import { type FastifyInstance } from 'fastify'
 import { z } from 'zod'
 
 import { prisma } from '../lib/prisma'
+import { authMiddleware } from '@/middlewares/auth'
 
 const paramsSchema = z.object({
   id: z.string().uuid(),
@@ -14,6 +15,8 @@ const bodySchema = z.object({
 })
 
 export async function memoriesRoutes(app: FastifyInstance): Promise<any> {
+  app.addHook('preHandler', authMiddleware)
+
   app.get('/memories', async () => {
     const memories = await prisma.memory.findMany({
       orderBy: {
