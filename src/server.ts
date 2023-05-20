@@ -6,6 +6,7 @@ import multipart from '@fastify/multipart'
 import 'dotenv/config'
 
 import { authRoutes } from './routes/auth'
+import { downloadRoutes } from './routes/download'
 import { memoriesRoutes } from './routes/memories'
 import { uploadRoutes } from './routes/upload'
 
@@ -33,6 +34,7 @@ app.get('/', () => {
 void app.register(authRoutes)
 void app.register(memoriesRoutes)
 void app.register(uploadRoutes)
+void app.register(downloadRoutes)
 
 const port = process.env.SERVER_PORT ?? 3333
 
